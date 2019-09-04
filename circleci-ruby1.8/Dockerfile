@@ -15,6 +15,8 @@ ENV RUBY_DOWNLOAD_SHA256 45cc90308e27b276621ac9c5139944a14ff194b802f2e775bc4a9ad
 ENV RUBYGEMS_VERSION 1.6.2
 ENV RUBYGEMS_DOWNLOAD_SHA256 cb5261818b931b5ea2cb54bc1d583c47823543fcf9682f0d6298849091c1cea7
 
+ENV BUNDLER_VERSION 1.17.3
+
 RUN set -ex \
     && buildDeps='\
          build-essential \
@@ -49,7 +51,7 @@ RUN set -ex \
     && cd .. \
     && rm -fr ruby \
     \
-    && wget -qO rubygems.tar.gz https://rubygems.org/rubygems/rubygems-1.6.2.tgz \
+    && wget -qO rubygems.tar.gz https://rubygems.org/rubygems/rubygems-${RUBYGEMS_VERSION}.tgz \
 	  && echo "$RUBYGEMS_DOWNLOAD_SHA256 rubygems.tar.gz" | sha256sum -c - \
     && mkdir /usr/src/rubygems \
     && tar -xzf rubygems.tar.gz -C /usr/src/rubygems --strip-components=1 \
@@ -58,7 +60,7 @@ RUN set -ex \
     && ruby ./setup.rb \
     && cd .. \
     && rm -fr rubygems \
-    && gem install bundler -v 1.17.3 \
+    && gem install bundler -v $BUNDLER_VERSION \
     \
     && apt-get purge -y --auto-remove $buildDeps \
     && rm -rf /var/lib/apt/lists/*
