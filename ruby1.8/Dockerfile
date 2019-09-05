@@ -34,7 +34,7 @@ RUN set -eux; \
 		libreadline-dev \
 		libxml2-dev \
 		libxslt-dev \
-		libssl-1.0-dev \
+		libssl1.0-dev \
 		make \
 		wget \
 		xz-utils \
