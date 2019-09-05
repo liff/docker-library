@@ -1,19 +1,5 @@
 FROM debian:stretch-slim
 
-RUN set -eux; \
-	apt-get update; \
-	apt-get install -y --no-install-recommends \
-		bzip2 \
-		ca-certificates \
-		libffi-dev \
-		libgmp-dev \
-		libssl1.0-dev \
-		libyaml-dev \
-		procps \
-		zlib1g-dev \
-	; \
-	rm -rf /var/lib/apt/lists/*
-
 # skip installing gem documentation
 RUN set -eux; \
 	mkdir -p /usr/local/etc; \
@@ -48,6 +34,7 @@ RUN set -eux; \
 		libreadline-dev \
 		libxml2-dev \
 		libxslt-dev \
+		libssl-1.0-dev \
 		make \
 		wget \
 		xz-utils \
